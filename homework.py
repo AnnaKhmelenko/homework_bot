@@ -50,7 +50,6 @@ def check_tokens():
             f'Отсутствуют обязательные переменные окружения: {
                 ", ".join(missing_tokens)}'
         )
-    return True
 
 
 def send_message(bot, message):
@@ -152,7 +151,8 @@ def main():
 
     while True:
         try:
-            _process_homeworks(bot, timestamp, last_sent_message)
+            timestamp, last_sent_message = _process_homeworks(
+                bot, timestamp, last_sent_message)
         except Exception as error:
             last_sent_message = _handle_error(bot, error, last_sent_message)
         finally:
