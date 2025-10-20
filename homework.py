@@ -166,7 +166,7 @@ def _process_homeworks(bot, timestamp, last_sent_message):
 
     if not homeworks:
         logging.debug('Нет новых статусов')
-        return timestamp
+        return response.get('current_date', timestamp), last_sent_message
 
     homework = homeworks[0]
     message = parse_status(homework)
@@ -175,7 +175,7 @@ def _process_homeworks(bot, timestamp, last_sent_message):
         send_message(bot, message)
         last_sent_message = message
 
-    return response.get('current_date', timestamp)
+    return response.get('current_date', timestamp), last_sent_message
 
 
 def _handle_error(bot, error, last_sent_message):
